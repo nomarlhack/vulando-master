@@ -1,67 +1,3 @@
-기본 콘텐츠로 건너뛰기
-
-서비스
-검색
-[알트+S]
-
-
-
-
-오레곤
-
-괴짜
-
-리소스 그룹 및 태그 편집기
-
-EC2
-
-CodeGuru Security는 현재 프리뷰 버전
-이 서비스는 변경될 수 있습니다. 이 서비스에 대한 자세한 내용은 CodeGuru Security 사용 설명서 를 참조하세요.
-피드백 제공
-
-코드구루
-보안: 통합
-GitHub 또는 GitHub Enterprise와 통합
-GitHub 또는 GitHub Enterprise와 통합
-다음 단계에 따라 CodeGuru Security를 GitHub 파이프라인에 통합할 수 있습니다. 설정이 완료되면 스캔을 실행한 후 GitHub 코드 스캔 섹션과 Findings(결과) 페이지에서 보안 결과를 볼 수 있습니다.
-
-
-GitHub 또는 GitHub 엔터프라이즈 클라우드
-
-GitHub 엔터프라이즈 서버
-1단계: IAM 역할 생성 - optional
-장기 자격 증명을 저장할 필요 없이 워크플로가 계정에서 검사를 실행할 수 있도록 허용하는 IAM 역할 및 신뢰 정책을 구성하려면 다음 단계를 따르세요. 이 역할은 다음 단계의 워크플로 스크립트에서 맡게 됩니다. 더 알아보기 
-CodeGuru Security를 GitHub과(와) 함께 사용하도록 IAM 역할을 이미 구성한 경우에는 이 단계를 건너뛰어도 됩니다.
-다음 역할 생성 옵션 중 하나를 선택합니다.
-CloudFormation 템플릿 사용(권장)
-수동으로 IAM ID구성
-To manually configure an IAM role for GitHub, see Amazon Web Services에서 OpenID 연결 구성 GitHub 문서에서. 역할의 CodeGuru 보안 권한에 대해 자세히 알아보려면 IAM 권한 구성을 참조하세요. .
-2단계: GitHub에서 사용자 지정 워크플로 생성
-CodeGuru Security와 통합하려면 보안 스캔을 실행하는 단계와 작업을 포함하는 리포지토리의 사용자 지정 워크플로를 정의해야 합니다. 다음 단계에 따라 새 워크플로를 생성합니다. 워크플로 파일을 만들면 파일에 정의된 이벤트를 기반으로 코드 스캔이 자동으로 시작됩니다.
-GitHub 계정  방문
-CodeGuru Security 스캔을 실행할 리포지토리 열기
-작업 탭 으로 이동
-새 워크플로를 선택하세요.
-워크플로 직접 설정을 선택하세요 .
-파일 에 다음 코드를 붙여넣고 .github/workflow/main.yml변경 사항을 커밋합니다.
-코드 보기
-3단계: 스캔 결과 보기
-워크플로를 생성한 후 CodeGuru 보안은 워크플로 파일에 정의된 이벤트를 기반으로 자동으로 스캔을 실행합니다. 스캔 및 해당 결과를 보려면 스캔 페이지로 이동하여 보려는 스캔을 선택하십시오. 스캔 세부 정보 페이지에서 결과 탭을 선택하여 해당 스캔으로 생성된 결과를 확인합니다.
-코드 스캔을 활성화하여 GitHub에서 결과를 볼 수도 있습니다. 코드 스캔을 활성화하려면 코드 스캔 활성화를 참조하세요. GitHub 문서에서. 그런 다음 리포지토리의 보안 탭으로 이동하고 왼쪽 탐색 모음에서 코드 스캔을 선택하여 결과를 확인합니다.
-취소
-완료
-
-
-CloudShell
-의견
-© 2024, Amazon Web Services, Inc. 또는 계열사.
-개인 정보 보호
-약관
-쿠키 기본 설정
-코드 보기
-
-다음 예제는 기본 분기가 커밋될 때마다 스캔을 실행합니다.
-다음을 복사하여 .github/workflows/main.yml파일 에 붙여넣으세요.
 name: CodeGuru Security Example
 on:
   push:
@@ -109,6 +45,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: codeguru-security-results.sarif.json
-
-취소
-확인
